@@ -19,12 +19,6 @@ public:
         tail = nullptr;
     }
 
-    ~LinkedList(){
-
-        Item* prev;
-
-    }
-
     class Iterator;
 
     Iterator begin(){

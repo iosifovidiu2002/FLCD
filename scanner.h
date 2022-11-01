@@ -46,8 +46,6 @@ public:
         }
     } 
 
-    
-
     void scan(std::string file_path){
         std::string content;
         std::ifstream f(file_path.c_str());
@@ -100,7 +98,6 @@ public:
 
                     if (current_token != "" && is_current_token){
                         pif->insert({current_token, {token_id.value(), -1}}); 
-                        // program_tokens.insert(current_token);
                     }
 
                                         current_separator = std::string(1,c);
@@ -111,7 +108,6 @@ public:
 
                     if (current_separator != " " && current_separator != "'"){
                         std::optional<int> separator_id = tokens->search(current_separator);
-                        // Add the current separator to the PIF List
                         if (separator_id.has_value()){
                             pif->insert({current_separator, {separator_id.value(), -1}});
                         }
@@ -125,16 +121,5 @@ public:
         } catch(std::runtime_error& e){
             std::cout << e.what() << " on line " << current_line << std::endl;
         }
-
-        std::cout << std::string(*identifier_constant_sym_table);
-        std::cout << "----------------" << std::endl;
-        std::cout << std::string(*tokens);
-        std::cout << "----------------" << std::endl;
-
-        for ( LinkedList<std::pair<std::string, std::pair<int, int>>>::Iterator iterator = (*pif).begin(); iterator != (*pif).end(); iterator++){
-            auto p = * iterator;
-            std::cout << p.first << " {" << p.second.first << ", " << p.second.second << "}" << std::endl;
-        }
     }
-
 };
