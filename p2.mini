@@ -1,0 +1,21 @@
+
+func main(): zilch{
+    
+    var x: int
+    var sum: int = 0
+    var temp: int = x
+
+    read(x)
+
+    repeat(x > 0){
+        sum = sum + (sum * 10) + x % 10
+        x = x / 10
+    }
+
+    assume(temp == sum){
+        write('P')
+    } otherwise {
+        write('N')
+    }
+
+}

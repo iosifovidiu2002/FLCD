@@ -1,0 +1,24 @@
+
+
+func main(): zilch{
+    
+    sum := 0
+    final count: int
+
+    read(count)
+    var currentElem: int
+
+    var numberList: int[count]
+ 
+    parse(var i: int = 0; i < count; 1){
+        read(currentElem)
+        numberList[currentElem]
+    }
+
+    parse(var i: int = 0; i < count; 1){
+        sum = sum + numberList[i]
+    }
+
+    write(sum/count)
+
+}
