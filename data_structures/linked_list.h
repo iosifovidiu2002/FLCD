@@ -1,6 +1,5 @@
 #include<sstream>
 
-
 template <class T>
 class LinkedList{
 

@@ -8,6 +8,7 @@
 #include <utility>
 #include "symbol_table.h"
 #include "data_structures/linked_list.h"
+#include "data_structures/finite_automata.h"
 
 class Scanner {
 
@@ -37,9 +38,12 @@ public:
     }
 
     EntryType ident_const_token_classifier(std::string token){
-        if(std::regex_match(token, std::regex("(_)*[a-zA-Z]+[a-zA-Z0-9]*"))){
+        FiniteAutomata fa_ident = FiniteAutomata::buildFiniteAutomata("FA.in");
+        FiniteAutomata fa_int = FiniteAutomata::buildFiniteAutomata("fa_integer.in");
+        // if(std::regex_match(token, std::regex("(_)*[a-zA-Z]+[a-zA-Z0-9]*"))){
+        if(fa_ident.matches(token)){
             return IDENTIFIER;
-        } else if(std::regex_match(token, std::regex("'.'")) || std::regex_match(token, std::regex("([+-]?[1-9][0-9]*)|0"))) {
+        } else if(std::regex_match(token, std::regex("'.'")) || fa_int.matches(token)) {
             return CONSTANT;
         } else {
             throw std::runtime_error(("Lexical error " + token).c_str());
@@ -118,6 +122,18 @@ public:
                     current_token += c;
                 }
             }
+
+        // Write SymbolTable to file ST.out
+        std::ofstream g_st("ST.out");
+        g_st << std::string(*identifier_constant_sym_table);
+        // Write PIF to file to PIF.out
+        std::ofstream g_pif("PIF.out");
+        for ( LinkedList<std::pair<std::string, std::pair<int, int>>>::Iterator iterator = (*pif).begin();iterator != (*pif).end(); iterator++){
+            auto p = *iterator;
+            g_pif << p.first << " -> " << "(" << p.second.first << ", " << p.second.second <<")\n";
+        }
+        std::ofstream g_tokens("TOKENS.out");
+        g_tokens << std::string(*tokens);
         } catch(std::runtime_error& e){
             std::cout << e.what() << " on line " << current_line << std::endl;
         }

@@ -9,7 +9,7 @@
 enum EntryType {
     IDENTIFIER,
     CONSTANT,
-     TOKEN
+    TOKEN
 };
 
 // Entry - hash map entry 
@@ -43,7 +43,7 @@ public:
     // HashMap Constructor
     // c : int - initial capacity of hash map
     HashTable(int c){
-        cap = c;
+        cap = next_prime(c);
         size = 0;
         linked_list_array = new LLItem*[cap]();
     }
@@ -170,7 +170,7 @@ public:
                 continue;
             }
             while(current != nullptr){
-                s << "(\"" << current->entry->key << "\", " << current->entry->value << ", " << current->entry->type <<  ")\n";
+                s << current->entry->key << " -> " << current->entry->value << "\n";
                 current = current->next; 
             }
         }

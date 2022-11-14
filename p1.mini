@@ -2,7 +2,7 @@
 
 func main(): zilch{
 
-    var a: int
+    var 1a: int
     var b: int
     var c: int
 
